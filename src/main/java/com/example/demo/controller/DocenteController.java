@@ -17,7 +17,7 @@ public class DocenteController {
 
     @Autowired
     DocenteService docenteService;
-
+    // COMMENTO DI PROVA
     // LISTA
     @GetMapping("/lista")
     public String list(Model model) {
