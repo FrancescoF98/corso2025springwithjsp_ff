@@ -17,7 +17,7 @@ public class DocenteController {
 
     @Autowired
     DocenteService docenteService;
-    // COMMENTO DI PROVA
+
     // LISTA
     @GetMapping("/lista")
     public String list(Model model) {
@@ -28,7 +28,7 @@ public class DocenteController {
     }
 
     // FORM NUOVO
-    @GetMapping("/nuovo")
+    @GetMapping("/new")
     public String showAdd(Model model) {
         model.addAttribute("docente", new Docente());
         return "form-docente";
@@ -40,14 +40,14 @@ public class DocenteController {
                          BindingResult br) {
         if (br.hasErrors()) return "form-docente";
         docenteService.save(docente);
-        return "redirect:/docenti";
+        return "redirect:/docenti/lista";
     }
 
     // FORM EDIT
     @GetMapping("/{id}/edit")
     public String showEdit(@PathVariable Long id, Model model) {
         model.addAttribute("docente", docenteService.get(id));
-        return "form-docente";
+        return "form-docente-edit";
     }
 
     // AGGIORNA
@@ -58,14 +58,14 @@ public class DocenteController {
         if (br.hasErrors()) return "form-docente";
         docente.setId(id);
         docenteService.save(docente);
-        return "redirect:/docenti";
+        return "redirect:/docenti/lista";
     }
 
     // DELETE
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
         docenteService.delete(id);
-        return "redirect:/docenti";
+        return "redirect:/docenti/lista";
     }
 
 
