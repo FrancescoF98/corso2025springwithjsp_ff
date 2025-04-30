@@ -47,7 +47,7 @@ public class DocenteController {
     @GetMapping("/{id}/edit")
     public String showEdit(@PathVariable Long id, Model model) {
         model.addAttribute("docente", docenteService.get(id));
-        return "form-docente-edit";
+        return "form-docente";
     }
 
     // AGGIORNA
