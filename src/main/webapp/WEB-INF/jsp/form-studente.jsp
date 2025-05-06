@@ -4,7 +4,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Nuovo Docente</title>
+    <title>Nuovo Studente</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,9 +46,9 @@
 </head>
 <body>
 
-    <h2>Inserisci un nuovo docente</h2>
+    <h2>Inserisci un nuovo studente</h2>
 
-    <form:form method="POST" modelAttribute="docente" action="${pageContext.request.contextPath}/docenti">
+    <form:form method="POST" modelAttribute="studente" action="${pageContext.request.contextPath}/studenti">
 
     <form:hidden path="id" />
         <div>
@@ -62,9 +62,20 @@
         </div>
 
         <div>
-            <label for="email">Email:</label>
-            <form:input path="email" id="email" type="email" required="true"/>
+            <label for="matricola">Matricola:</label>
+            <form:input path="matricola" id="maatricola" type="number" required="true"/>
         </div>
+
+        <div>
+            <label for="eta">Età:</label>
+            <form:input path="eta" id="eta" type="number" required="true"/>
+        </div>
+
+        <div>
+            <label for="citta_residenza">Città_residenza:</label>
+            <form:input path="citta_residenza" id="citta_residenza" required="true"/>
+        </div>
+
 
         <div>
             <button type="submit">Salva</button>

@@ -21,6 +21,7 @@ public class Docente {
 
     /* costruttori */
     public Docente() {}
+
     public Docente(String nome, String cognome, String email) {
         this.nome = nome;
         this.cognome = cognome;
