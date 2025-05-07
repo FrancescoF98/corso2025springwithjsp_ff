@@ -24,6 +24,10 @@
 <h1>Elenco Docenti</h1>
 <a class="btn btn-primary mb-3" href="<c:url value='/docenti/new'/>">Nuovo Docente</a>
 
+<a class="btn btn-secondary mb-3" href="/docenti/lista">Rimuovi filtri</a>
+<a class="btn btn-secondary mb-3" href="/docenti/lista?filtro=asc">Ordina per nome (A-Z)</a>
+<a class="btn btn-secondary mb-3" href="/docenti/lista?filtro=desc">Ordina per nome (Z-A)</a>
+
 <table class="table table-striped">
     <thead>
     <tr>

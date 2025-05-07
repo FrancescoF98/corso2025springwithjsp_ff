@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +19,25 @@ public class StudenteController {
     @Autowired
     StudenteService studenteService;
 
-    // LISTA
+    // LISTA - funziona
     @GetMapping("/lista")
-    public String list(Model model) {
+    public ModelAndView list(@RequestParam(name = "filtro", required = false) String filtro) {
+        ModelAndView modelAndView = new ModelAndView("list-studenti");
         List<Studente> studenti = new ArrayList<>();
-        studenti = studenteService.findAll();
-        model.addAttribute("studenti", studenti);
-        return "list-studenti";
+
+        if ("asc".equalsIgnoreCase(filtro)) {
+            studenti = studenteService.ordina_by_nome_asc();
+        } else if ("desc".equalsIgnoreCase(filtro)){
+            studenti = studenteService.ordina_by_nome_desc();
+        } else {
+            studenti = studenteService.findAll();
+        }
+
+        modelAndView.addObject("studenti", studenti);
+        return modelAndView;
     }
 
+    /*
     // FORM NUOVO
     @GetMapping("/new")
     public String showAdd(Model model) {
@@ -34,7 +45,19 @@ public class StudenteController {
         return "form-studente";
     }
 
-    // SALVA NUOVO
+     */
+
+
+    // FORM NUOVO - funziona
+    @GetMapping("/new")
+    public ModelAndView showAdd() {
+        ModelAndView modelAndView = new ModelAndView("form-studente");
+        modelAndView.addObject("studente", new Studente());
+        return modelAndView;
+    }
+
+
+    // SALVA NUOVO - funziona
     @PostMapping
     public String create(@ModelAttribute("studente") Studente studente,
                          BindingResult br) {
@@ -43,12 +66,26 @@ public class StudenteController {
         return "redirect:/studenti/lista";
     }
 
-    // FORM EDIT
+
+    /*
+    // FORM EDIT - old
     @GetMapping("/{id}/edit")
     public String showEdit(@PathVariable Long id, Model model) {
         model.addAttribute("studente", studenteService.get(id));
         return "form-studente";
     }
+    */
+
+
+    // FORM EDIT
+    @GetMapping("/{id}/edit")
+    public ModelAndView showEdit(@PathVariable Long id, Model model) {
+        ModelAndView modelAndView = new ModelAndView("form-studente");
+        modelAndView.addObject("studente", studenteService.get(id));
+        return modelAndView;
+    }
+
+
 
     // AGGIORNA
     @PostMapping("/{id}")

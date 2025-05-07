@@ -15,6 +15,9 @@
                 <a class="btn btn-primary mb-3" href="<c:url value='/docenti/lista'/>">Docenti</a>
             </li>
             <li class="nav-item">
+
+            </li>
+            <li class="nav-item">
                 <a class="btn btn-primary mb-3" href="<c:url value='/studenti/lista'/>">Studenti</a>
             </li>
         </ul>
@@ -23,6 +26,10 @@
 
 <h1>Elenco Studenti</h1>
 <a class="btn btn-primary mb-3" href="<c:url value='/studenti/new'/>">Nuovo Studente</a>
+
+<a class="btn btn-secondary mb-3" href="/studenti/lista">Rimuovi filtri</a>
+<a class="btn btn-secondary mb-3" href="/studenti/lista?filtro=asc">Ordina per nome (A-Z)</a>
+<a class="btn btn-secondary mb-3" href="/studenti/lista?filtro=desc">Ordina per nome (Z-A)</a>
 
 <table class="table table-striped">
     <thead>

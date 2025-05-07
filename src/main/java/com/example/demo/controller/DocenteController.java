@@ -20,9 +20,17 @@ public class DocenteController {
 
     // LISTA
     @GetMapping("/lista")
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(name = "filtro", required = false) String filtro) {
         List<Docente> docenti = new ArrayList<>();
-        docenti = docenteService.findAll();
+
+        if ("asc".equalsIgnoreCase(filtro)) {
+            docenti = docenteService.ordina_by_nome_asc();
+        } else if ("desc".equalsIgnoreCase(filtro)){
+            docenti = docenteService.ordina_by_nome_desc();
+        } else {
+            docenti = docenteService.findAll();
+        }
+
         model.addAttribute("docenti", docenti);
         return "list-docenti";
     }

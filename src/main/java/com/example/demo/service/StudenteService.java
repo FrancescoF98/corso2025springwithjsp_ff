@@ -29,4 +29,13 @@ public class StudenteService {
     public void delete(Long id) {
         studenteRepository.deleteById(id);
     }
+
+    // Query custom
+    public List<Studente> ordina_by_nome_asc() {
+        return studenteRepository.ordina_by_nome_asc();
+    }
+
+    public List<Studente> ordina_by_nome_desc() {
+        return studenteRepository.ordina_by_nome_desc();
+    }
 }

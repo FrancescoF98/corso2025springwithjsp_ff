@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Docente;
+import com.example.demo.entity.Studente;
 import com.example.demo.repository.DocenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,14 @@ public class DocenteService {
     public void delete(Long id) {
         docenteRepository.deleteById(id);
     }
+
+    // Query custom
+    public List<Docente> ordina_by_nome_asc() {
+        return docenteRepository.ordina_by_nome_asc();
+    }
+
+    public List<Docente> ordina_by_nome_desc() {
+        return docenteRepository.ordina_by_nome_desc();
+    }
+
 }

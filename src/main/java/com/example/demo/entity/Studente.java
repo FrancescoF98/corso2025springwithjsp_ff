@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+
+// utilizzare model_and_view al posto di model
+
 @Entity
 @Table(name = "studenti")
 public class Studente {
