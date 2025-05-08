@@ -2,12 +2,15 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 // utilizzare model_and_view al posto di model
 
 @Entity
-@Table(name = "studenti")
-public class Studente {
+@Table(name = "discenti")
+public class Discente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +31,15 @@ public class Studente {
     @Column(nullable = false)
     private String citta_residenza;
 
-    /* costruttori */
-    public Studente() {}
+    /*
+    @ManyToMany(mappedBy = "corso_discente")
+    private List<Corso> corsi = new ArrayList<>();
+     */
 
-    public Studente(String nome, String cognome, Integer matricola, Integer eta, String citta_residenza) {
+    /* costruttori */
+    public Discente() {}
+
+    public Discente(String nome, String cognome, Integer matricola, Integer eta, String citta_residenza) {
         this.nome = nome;
         this.cognome = cognome;
         this.matricola = matricola;
@@ -89,4 +97,14 @@ public class Studente {
     public void setCitta_residenza(String citta_residenza) {
         this.citta_residenza = citta_residenza;
     }
+
+    /*
+    public List<Corso> getCorsi() {
+        return corsi;
+    }
+
+    public void setCorsi(List<Corso> corsi) {
+        this.corsi = corsi;
+    }
+     */
 }

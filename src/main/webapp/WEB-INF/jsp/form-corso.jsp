@@ -1,10 +1,11 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Nuovo Studente</title>
+    <title>Nuovo Corso</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,9 +47,9 @@
 </head>
 <body>
 
-    <h2>Inserisci un nuovo studente</h2>
+    <h2>Inserisci un nuovo corso</h2>
 
-    <form:form method="POST" modelAttribute="studente" action="${pageContext.request.contextPath}/studenti">
+    <form:form method="POST" modelAttribute="corso" action="${pageContext.request.contextPath}/corsi">
 
     <form:hidden path="id" />
         <div>
@@ -57,26 +58,17 @@
         </div>
 
         <div>
-            <label for="cognome">Cognome:</label>
-            <form:input path="cognome" id="cognome" required="true"/>
+            <label for="id_doc">Seleziona Docente:</label>
+                <form:select path="id_doc" id="id_doc">
+                    <form:option value="" label="-- Seleziona --" />
+                    <form:options items="${docenti}" itemValue="id" itemLabel="nome" />
+                </form:select>
         </div>
 
         <div>
-            <label for="matricola">Matricola:</label>
-            <form:input path="matricola" id="maatricola" type="number" required="true"/>
+            <label for="anno_accademico">Anno Accademico:</label>
+            <form:input path="anno_accademico" id="anno_accademico" type="number" required="true"/>
         </div>
-
-        <div>
-            <label for="eta">Età:</label>
-            <form:input path="eta" id="eta" type="number" required="true"/>
-        </div>
-
-        <div>
-            <label for="citta_residenza">Città_residenza:</label>
-            <form:input path="citta_residenza" id="citta_residenza" required="true"/>
-        </div>
-
-
         <div>
             <button type="submit">Salva</button>
         </div>
