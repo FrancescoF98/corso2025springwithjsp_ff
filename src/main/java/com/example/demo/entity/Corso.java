@@ -23,15 +23,15 @@ public class Corso {
     @Column(nullable = false)
     private Integer anno_accademico;
 
-    /*
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "corso_discente",
             joinColumns = @JoinColumn(name = "id_corso"),
             inverseJoinColumns = @JoinColumn(name = "id_discente")
     )
     private List<Discente> discenti = new ArrayList<>();
-     */
+
 
     /* costruttori */
     public Corso() {}
@@ -74,7 +74,7 @@ public class Corso {
         this.anno_accademico = anno_accademico;
     }
 
-    /*
+    //
     public List<Discente> getDiscenti() {
         return discenti;
     }
@@ -82,6 +82,6 @@ public class Corso {
     public void setDiscenti(List<Discente> discenti) {
         this.discenti = discenti;
     }
-     */
+
 }
 

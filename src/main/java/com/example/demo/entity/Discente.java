@@ -31,10 +31,10 @@ public class Discente {
     @Column(nullable = false)
     private String citta_residenza;
 
-    /*
-    @ManyToMany(mappedBy = "corso_discente")
+
+    @ManyToMany(mappedBy = "discenti", fetch = FetchType.LAZY)
     private List<Corso> corsi = new ArrayList<>();
-     */
+
 
     /* costruttori */
     public Discente() {}
@@ -98,7 +98,7 @@ public class Discente {
         this.citta_residenza = citta_residenza;
     }
 
-    /*
+
     public List<Corso> getCorsi() {
         return corsi;
     }
@@ -106,5 +106,5 @@ public class Discente {
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
-     */
+
 }

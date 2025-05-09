@@ -39,4 +39,10 @@ public class DiscenteService {
         return discenteRepository.ordina_by_nome_desc();
     }
 
+    //
+    public List<Discente> findAllByIds(List<Long> ids) {
+        return discenteRepository.findAllById(ids);
+    }
+
+
 }

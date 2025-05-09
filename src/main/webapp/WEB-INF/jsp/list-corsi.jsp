@@ -35,7 +35,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>ID</th><th>Nome</th><th>Docente</th><th>Anno Accademico</th>
+        <th>ID</th><th>Nome</th><th>Docente</th><th>Anno Accademico</th><th>Studenti</th>
     </tr>
     </thead>
     <tbody>
@@ -45,6 +45,7 @@
             <td>${cs.nome}</td>
             <td>${cs.id_doc.nome} ${cs.id_doc.cognome}</td>
             <td>${cs.anno_accademico}</td>
+            <td>${cs.discenti.size()}</td>
             <td>
                 <a class="btn btn-sm btn-secondary" href="<c:url value='/corsi/${cs.id}/edit'/>">Modifica</a>
                 <a class="btn btn-sm btn-danger"

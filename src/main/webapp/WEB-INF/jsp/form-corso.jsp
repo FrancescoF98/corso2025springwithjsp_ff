@@ -51,6 +51,7 @@
 
     <form:form method="POST" modelAttribute="corso" action="${pageContext.request.contextPath}/corsi">
 
+
     <form:hidden path="id" />
         <div>
             <label for="nome">Nome:</label>
@@ -69,6 +70,13 @@
             <label for="anno_accademico">Anno Accademico:</label>
             <form:input path="anno_accademico" id="anno_accademico" type="number" required="true"/>
         </div>
+
+        <div>
+            <label for="discenti">Seleziona Discenti:</label>
+            <form:select path="discenti" items="${discenti}" itemValue="id" itemLabel="nome" multiple="true" />
+        </div>
+
+
         <div>
             <button type="submit">Salva</button>
         </div>

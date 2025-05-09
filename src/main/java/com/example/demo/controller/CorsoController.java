@@ -67,6 +67,8 @@ public class CorsoController {
 
         modelAndView.addObject("corso", new Corso());
         modelAndView.addObject("docenti", docenti);
+        modelAndView.addObject("discenti", discenteService.findAll());
+
         return modelAndView;
     }
 
@@ -76,8 +78,13 @@ public class CorsoController {
     public String create(@ModelAttribute("corso") Corso corso,
                          @RequestParam(value = "discenti", required = false) List<Long> id_discenti,
                          BindingResult br) {
-
         if (br.hasErrors()) return "form-corso";
+
+        if (id_discenti != null) {
+            List<Discente> selectedDiscenti = discenteService.findAllByIds(id_discenti);
+            corso.setDiscenti(selectedDiscenti);
+        }
+
         corsoService.save(corso);
         return "redirect:/corsi/lista";
     }
@@ -101,6 +108,8 @@ public class CorsoController {
 
         modelAndView.addObject("corso", corsoService.get(id));
         modelAndView.addObject("docenti", docenti);
+        modelAndView.addObject("discenti", discenteService.findAll());
+
         return modelAndView;
     }
 
