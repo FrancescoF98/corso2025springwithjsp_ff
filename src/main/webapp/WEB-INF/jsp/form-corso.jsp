@@ -1,6 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -62,7 +62,7 @@
             <label for="id_doc">Seleziona Docente:</label>
                 <form:select path="id_doc" id="id_doc">
                     <form:option value="" label="-- Seleziona --" />
-                    <form:options items="${docenti}" itemValue="id" itemLabel="nome" />
+                    <form:options items="${docenti}" itemValue="id" itemLabel="nome" required="true"/>
                 </form:select>
         </div>
 

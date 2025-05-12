@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,16 +42,16 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="s" items="${discenti}">
+    <c:forEach var="d" items="${discenti}">
         <tr>
-            <td>${s.id}</td>
-            <td>${s.nome}</td>
-            <td>${s.cognome}</td>
-            <td>${s.matricola}</td>
-            <td>${s.eta}</td>
-            <td>${s.citta_residenza}</td>
+            <td>${d.id}</td>
+            <td>${d.nome}</td>
+            <td>${d.cognome}</td>
+            <td>${d.matricola}</td>
+            <td>${d.eta}</td>
+            <td>${d.citta_residenza}</td>
             <td>
-                <a class="btn btn-sm btn-secondary" href="<c:url value='/discenti/${s.id}/edit'/>">Modifica</a>
+                <a class="btn btn-sm btn-secondary" href="<c:url value='/discenti/${d.id}/edit'/>">Modifica</a>
                 <a class="btn btn-sm btn-danger"
                    href="<c:url value='/discenti/${d.id}/delete'/>"
                    onclick="return confirm('Sei sicuro?')">Elimina</a>

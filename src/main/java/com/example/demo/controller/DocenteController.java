@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Corso;
 import com.example.demo.entity.Docente;
+import com.example.demo.repository.CorsoRepository;
 import com.example.demo.service.DocenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ public class DocenteController {
 
     @Autowired
     DocenteService docenteService;
+    @Autowired
+    CorsoRepository corsoRepository;
 
     // LISTA
     @GetMapping("/lista")
@@ -72,12 +76,18 @@ public class DocenteController {
     // DELETE
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
-        docenteService.delete(id);
+
+        List<Corso> corsi = corsoRepository.trova_corsi_con_id_docente(id);
+
+        if (corsi.isEmpty()) {
+            docenteService.delete(id);
+        } else{
+            throw new RuntimeException("Impossibile eliminare il docente: ci sono corsi associati.");
+        }
+
         return "redirect:/docenti/lista";
+
     }
-
-
-
 
 
 

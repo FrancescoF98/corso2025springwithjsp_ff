@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
             <td>
                 <a class="btn btn-sm btn-secondary" href="<c:url value='/corsi/${cs.id}/edit'/>">Modifica</a>
                 <a class="btn btn-sm btn-danger"
-                   href="<c:url value='/corsi/${d.id}/delete'/>"
+                   href="<c:url value='/corsi/${cs.id}/delete'/>"
                    onclick="return confirm('Sei sicuro?')">Elimina</a>
             </td>
         </tr>

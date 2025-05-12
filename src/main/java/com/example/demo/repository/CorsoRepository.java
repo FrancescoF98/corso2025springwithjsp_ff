@@ -17,5 +17,8 @@ public interface CorsoRepository extends JpaRepository<Corso, Long> {
     @Query(value = "SELECT * FROM corsi ORDER BY nome DESC", nativeQuery = true)
     List<Corso> ordina_by_nome_desc();
 
+    // Per quando si elimina un docente
+    @Query(value = "SELECT * FROM corsi WHERE id_doc = ?1", nativeQuery = true)
+    List<Corso> trova_corsi_con_id_docente(Long id_doc);
 }
 
