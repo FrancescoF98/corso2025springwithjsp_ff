@@ -35,7 +35,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th><th>Nome</th><th>Docente</th><th>Anno Accademico</th><th>Studenti</th>
+            <th>ID</th><th>Nome</th><th>Docente</th><th>Anno Accademico</th><th>Studenti</th><th>Azioni</th>
         </tr>
         </thead>
         <tbody>

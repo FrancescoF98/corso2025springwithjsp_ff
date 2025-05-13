@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Discente;
+import com.example.demo.converter.Converter;
+import com.example.demo.data.entity.Discente;
 import com.example.demo.service.DiscenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ public class DiscenteController {
 
     @Autowired
     DiscenteService discenteService;
-
+    @Autowired
+    Converter converter;
 
 
 
@@ -36,7 +38,7 @@ public class DiscenteController {
             discenti = discenteService.findAll();
         }
 
-        modelAndView.addObject("discenti", discenti);
+        modelAndView.addObject("discenti", converter.discente_convert_to_dto(discenti));
         return modelAndView;
     }
 

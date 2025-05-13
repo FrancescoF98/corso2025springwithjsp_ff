@@ -36,7 +36,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>ID</th><th>Nome</th><th>Cognome</th><th>Matricola</th><th>Età</th><th>Città Residenza</th>
+        <th>ID</th><th>Nome</th><th>Cognome</th><th>Matricola</th><th>Età</th><th>Azioni</th>
     </tr>
     </thead>
     <tbody>
@@ -47,7 +47,6 @@
             <td>${d.cognome}</td>
             <td>${d.matricola}</td>
             <td>${d.eta}</td>
-            <td>${d.citta_residenza}</td>
             <td>
                 <a class="btn btn-sm btn-secondary" href="<c:url value='/discenti/${d.id}/edit'/>">
                 <i class="bi bi-pencil-square"></i>

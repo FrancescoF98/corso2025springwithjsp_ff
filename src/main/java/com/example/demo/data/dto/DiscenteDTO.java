@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.data.dto;
 
 import jakarta.persistence.*;
 
@@ -6,45 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-// utilizzare model_and_view al posto di model
 
-@Entity
-@Table(name = "discenti")
-public class Discente {
+public class DiscenteDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
     private String cognome;
 
-    @Column(nullable = false, unique = true)
     private Integer matricola;
 
-    @Column(nullable = false)
     private Integer eta;
 
-    @Column(nullable = false)
-    private String citta_residenza;
 
-
-    @ManyToMany(mappedBy = "discenti", fetch = FetchType.LAZY)
-    private List<Corso> corsi = new ArrayList<>();
+    private List<CorsoDTO> corsi = new ArrayList<>();
 
 
     /* costruttori */
-    public Discente() {}
+    public DiscenteDTO() {}
 
-    public Discente(String nome, String cognome, Integer matricola, Integer eta, String citta_residenza) {
+    public DiscenteDTO(String nome, String cognome, Integer matricola, Integer eta) {
         this.nome = nome;
         this.cognome = cognome;
         this.matricola = matricola;
         this.eta = eta;
-        this.citta_residenza = citta_residenza;
     }
 
     public Long getId() {
@@ -90,20 +76,12 @@ public class Discente {
         this.eta = eta;
     }
 
-    public String getCitta_residenza() {
-        return citta_residenza;
-    }
 
-    public void setCitta_residenza(String citta_residenza) {
-        this.citta_residenza = citta_residenza;
-    }
-
-
-    public List<Corso> getCorsi() {
+    public List<CorsoDTO> getCorsi() {
         return corsi;
     }
 
-    public void setCorsi(List<Corso> corsi) {
+    public void setCorsi(List<CorsoDTO> corsi) {
         this.corsi = corsi;
     }
 

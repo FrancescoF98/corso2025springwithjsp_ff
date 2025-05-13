@@ -1,33 +1,27 @@
-package com.example.demo.entity;
+package com.example.demo.data.dto;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "docenti")
-public class Docente {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DocenteDTO {
+
     private Long id;
 
-    @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
     private String cognome;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    //private String email;
 
 
 
     /* costruttori */
-    public Docente() {}
+    public DocenteDTO() {}
 
-    public Docente(String nome, String cognome, String email) {
+    public DocenteDTO(String nome, String cognome) {
         this.nome = nome;
         this.cognome = cognome;
-        this.email = email;
+        //this.email = email;
     }
 
     public Long getId() {
@@ -54,11 +48,11 @@ public class Docente {
         this.cognome = cognome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 }
