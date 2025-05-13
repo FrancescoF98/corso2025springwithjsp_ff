@@ -46,7 +46,7 @@
 </head>
 <body>
 
-    <h2>Inserisci un nuovo docente</h2>
+    <h2 style="text-align: center;">Inserisci un nuovo docente</h2>
 
     <form:form method="POST" modelAttribute="docente" action="${pageContext.request.contextPath}/docenti">
 

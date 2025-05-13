@@ -11,12 +11,10 @@
 
 <nav class="ms-1 me-1 p-3 navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <div class="container-fluid">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav d-flex gap-3">
             <li class="nav-item">
                 <a class="btn btn-primary mb-3" href="<c:url value='/docenti/lista'/>">Docenti</a>
             </li>
-            <li class="nav-item">
-
             </li>
             <li class="nav-item">
                 <a class="btn btn-primary mb-3" href="<c:url value='/discenti/lista'/>">Discenti</a>

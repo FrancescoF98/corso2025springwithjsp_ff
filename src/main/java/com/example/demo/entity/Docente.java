@@ -19,6 +19,8 @@ public class Docente {
     @Column(nullable = false, unique = true)
     private String email;
 
+
+
     /* costruttori */
     public Docente() {}
 

@@ -12,7 +12,7 @@
 
     <nav class="ms-1 me-1 p-3 navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
             <div class="container-fluid">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav d-flex gap-3">
                     <li class="nav-item">
                         <a class="btn btn-primary mb-3" href="<c:url value='/docenti/lista'/>">Docenti</a>
                     </li>
@@ -32,10 +32,25 @@
          class="d-block mx-auto" />
 
     <h3></h3>
-    <h3>Questo è un messaggio di ERRORE. Qualcosa è andato storto.</h3>
+    <h3 style="text-align: center;">Qualcosa è andato storto.</h3>
+    <p></p>
 
-    <h4>Messaggio: ${message}</h4>
-    <h4>Codice di stato: ${status}</h4>
+    <h5><b>Codice di stato:</b></h5>
+    <h6>${status}</h6>
+    <p></p>
+
+    <h5><b>Messaggio:</b></h5>
+    <h6>${message}</h6>
+    <p></p>
+
+    <h5><b>Exception:</b></h5>
+    <h6>${exception}</h6>
+    <p></p>
+
+    <h5><b>Exception Type:</b></h5>
+    <h6>${exception_type}</h6>
+
+
 
 </body>
 </html>
