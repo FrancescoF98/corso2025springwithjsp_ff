@@ -49,10 +49,16 @@
             <td>${d.eta}</td>
             <td>${d.citta_residenza}</td>
             <td>
-                <a class="btn btn-sm btn-secondary" href="<c:url value='/discenti/${d.id}/edit'/>">Modifica</a>
+                <a class="btn btn-sm btn-secondary" href="<c:url value='/discenti/${d.id}/edit'/>">
+                <i class="bi bi-pencil-square"></i>
+                Modifica
+                </a>
                 <a class="btn btn-sm btn-danger"
                    href="<c:url value='/discenti/${d.id}/delete'/>"
-                   onclick="return confirm('Sei sicuro?')">Elimina</a>
+                   onclick="return confirm('Sei sicuro?')">
+                   <i class="bi bi-trash"></i>
+                   Elimina
+                </a>
             </td>
         </tr>
     </c:forEach>

@@ -47,10 +47,13 @@
                     <td>${cs.anno_accademico}</td>
                     <td>${cs.discenti.size()}</td>
                     <td>
-                        <a class="btn btn-sm btn-secondary" href="<c:url value='/corsi/${cs.id}/edit'/>">Modifica</a>
+                        <a class="btn btn-sm btn-secondary" href="<c:url value='/corsi/${cs.id}/edit'/>"><i class="bi bi-pencil-square"></i>Modifica</a>
                         <a class="btn btn-sm btn-danger"
                            href="<c:url value='/corsi/${cs.id}/delete'/>"
-                           onclick="return confirm('Sei sicuro?')">Elimina</a>
+                           onclick="return confirm('Sei sicuro?')">
+                           <i class="bi bi-trash"></i>
+                           Elimina
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

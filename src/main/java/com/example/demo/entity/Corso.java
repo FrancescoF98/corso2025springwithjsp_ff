@@ -17,7 +17,8 @@ public class Corso {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "id_doc", nullable = false)
+//    @JoinColumn(name = "id_doc", nullable = false)
+    @JoinColumn(name = "id_doc")
     private Docente id_doc;
 
     @Column(nullable = false)
