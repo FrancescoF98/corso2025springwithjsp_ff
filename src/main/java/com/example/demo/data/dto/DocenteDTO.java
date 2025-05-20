@@ -18,7 +18,8 @@ public class DocenteDTO {
     /* costruttori */
     public DocenteDTO() {}
 
-    public DocenteDTO(String nome, String cognome) {
+    public DocenteDTO(Long id, String nome, String cognome) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         //this.email = email;

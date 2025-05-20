@@ -1,5 +1,7 @@
 package com.example.demo.data.dto;
 
+import com.example.demo.data.entity.Discente;
+import com.example.demo.data.entity.Docente;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -11,20 +13,22 @@ public class CorsoDTO {
 
     private String nome;
 
-    private DocenteDTO id_doc;
+    private Docente id_doc;
 
     private Integer anno_accademico;
 
-    private List<DiscenteDTO> discenti = new ArrayList<>();
+    private List<Discente> discenti = new ArrayList<>();
 
 
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(String nome, DocenteDTO id_doc, Integer anno_accademico) {
+    public CorsoDTO(Long id, String nome, Docente id_doc, Integer anno_accademico, List<Discente> discenti) {
+        this.id = id;
         this.nome = nome;
         this.id_doc = id_doc;
         this.anno_accademico = anno_accademico;
+        this.discenti = discenti;
     }
 
     public Long getId() {
@@ -43,11 +47,11 @@ public class CorsoDTO {
         this.nome = nome;
     }
 
-    public DocenteDTO getId_doc() {
+    public Docente getId_doc() {
         return id_doc;
     }
 
-    public void setId_doc(DocenteDTO id_doc) {
+    public void setId_doc(Docente id_doc) {
         this.id_doc = id_doc;
     }
 
@@ -60,11 +64,11 @@ public class CorsoDTO {
     }
 
     //
-    public List<DiscenteDTO> getDiscenti() {
+    public List<Discente> getDiscenti() {
         return discenti;
     }
 
-    public void setDiscenti(List<DiscenteDTO> discenti) {
+    public void setDiscenti(List<Discente> discenti) {
         this.discenti = discenti;
     }
 

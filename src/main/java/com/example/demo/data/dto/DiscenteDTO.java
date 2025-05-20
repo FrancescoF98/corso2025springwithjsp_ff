@@ -26,7 +26,8 @@ public class DiscenteDTO {
     /* costruttori */
     public DiscenteDTO() {}
 
-    public DiscenteDTO(String nome, String cognome, Integer matricola, Integer eta) {
+    public DiscenteDTO(Long id, String nome, String cognome, Integer matricola, Integer eta) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.matricola = matricola;

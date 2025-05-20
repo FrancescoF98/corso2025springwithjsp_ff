@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.converter.Converter;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.data.entity.Discente;
@@ -28,6 +29,9 @@ public class CorsoController {
 
     @Autowired
     DiscenteService discenteService;
+
+    @Autowired
+    Converter converter;
 
     // LISTA
     @GetMapping("/lista")
