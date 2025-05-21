@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 public class DocenteDTO {
 
-    private Long id;
+    //private Long id;
 
     private String nome;
 
@@ -18,20 +18,20 @@ public class DocenteDTO {
     /* costruttori */
     public DocenteDTO() {}
 
-    public DocenteDTO(Long id, String nome, String cognome) {
-        this.id = id;
+    public DocenteDTO(String nome, String cognome) {
+        //this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         //this.email = email;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getNome() {
         return nome;

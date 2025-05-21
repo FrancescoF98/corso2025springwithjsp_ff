@@ -2,6 +2,7 @@ package com.example.demo.data.dto;
 
 import com.example.demo.data.entity.Discente;
 import com.example.demo.data.entity.Docente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class CorsoDTO {
 
+    @JsonIgnore
     private Long id;
 
     private String nome;
@@ -17,13 +19,13 @@ public class CorsoDTO {
 
     private Integer anno_accademico;
 
-    private List<Discente> discenti = new ArrayList<>();
+    private List<DiscenteDTO> discenti = new ArrayList<>();
 
 
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(Long id, String nome, Docente id_doc, Integer anno_accademico, List<Discente> discenti) {
+    public CorsoDTO(Long id, String nome, Docente id_doc, Integer anno_accademico, List<DiscenteDTO> discenti) {
         this.id = id;
         this.nome = nome;
         this.id_doc = id_doc;
@@ -31,6 +33,7 @@ public class CorsoDTO {
         this.discenti = discenti;
     }
 
+    @JsonIgnore
     public Long getId() {
         return id;
     }
@@ -64,11 +67,11 @@ public class CorsoDTO {
     }
 
     //
-    public List<Discente> getDiscenti() {
+    public List<DiscenteDTO> getDiscenti() {
         return discenti;
     }
 
-    public void setDiscenti(List<Discente> discenti) {
+    public void setDiscenti(List<DiscenteDTO> discenti) {
         this.discenti = discenti;
     }
 

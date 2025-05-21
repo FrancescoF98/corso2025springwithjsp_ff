@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
+import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.repository.CorsoRepository;
 import com.example.demo.service.DocenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/docenti")
 public class DocenteController {
 
@@ -25,9 +27,9 @@ public class DocenteController {
     @Autowired
     Converter converter;
 
-    // LISTA
+    // GET - tutti i docenti
     @GetMapping("/lista")
-    public String list(Model model, @RequestParam(name = "filtro", required = false) String filtro) {
+    public ResponseEntity<List<DocenteDTO>> list(@RequestParam(name = "filtro", required = false) String filtro) {
         List<Docente> docenti = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
@@ -38,18 +40,17 @@ public class DocenteController {
             docenti = docenteService.findAll();
         }
 
-        model.addAttribute("docenti", converter.docente_convert_to_dto(docenti));
-        return "list-docenti";
+        return ResponseEntity.ok(converter.docente_convert_to_dto(docenti));
     }
 
-    // FORM NUOVO
-    @GetMapping("/new")
-    public String showAdd(Model model) {
-        model.addAttribute("docente", new Docente());
-        return "form-docente";
+    // POST - nuovo docente
+    @PostMapping("/new")
+    public ResponseEntity<Docente> showAdd(@RequestBody Docente docente) {
+        Docente nuovo = docenteService.save(docente);
+        return ResponseEntity.ok(nuovo);
     }
 
-    // SALVA NUOVO
+    // POST -
     @PostMapping
     public String create(@ModelAttribute("docente") Docente docente,
                          BindingResult br) {
@@ -58,27 +59,35 @@ public class DocenteController {
         return "redirect:/docenti/lista";
     }
 
-    // FORM EDIT
-    @GetMapping("/{id}/edit")
-    public String showEdit(@PathVariable Long id, Model model) {
-        model.addAttribute("docente", docenteService.get(id));
-        return "form-docente";
+    // PUT - modifica
+    @PutMapping("/{id}/edit")
+    public ResponseEntity<Docente> showEdit(@PathVariable Long id, @RequestBody Docente doc_aggiornato) {
+        Docente docente = docenteService.get(id);
+
+        //
+        docente.setNome(doc_aggiornato.getNome());
+        docente.setCognome(doc_aggiornato.getCognome());
+
+        docenteService.save(docente);
+        return ResponseEntity.ok(docente);
     }
 
-    // AGGIORNA
-    @PostMapping("/{id}")
-    public String update(@PathVariable Long id,
-                         @ModelAttribute("docente") Docente docente,
-                         BindingResult br) {
-        if (br.hasErrors()) return "form-docente";
-        docente.setId(id);
-        docenteService.save(docente);
-        return "redirect:/docenti/lista";
-    }
+
+//    // AGGIORNA
+//    @PostMapping("/{id}")
+//    public String update(@PathVariable Long id,
+//                         @ModelAttribute("docente") Docente docente,
+//                         BindingResult br) {
+//        if (br.hasErrors()) return "form-docente";
+//        docente.setId(id);
+//        docenteService.save(docente);
+//        return "redirect:/docenti/lista";
+//    }
+
 
     // DELETE
-    @GetMapping("/{id}/delete")
-    public String delete(@PathVariable Long id) {
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
 
         List<Corso> corsi = corsoRepository.trova_corsi_con_id_docente(id);
 
@@ -88,8 +97,7 @@ public class DocenteController {
             throw new RuntimeException("Impossibile eliminare il docente: ci sono corsi associati.");
         }
 
-        return "redirect:/docenti/lista";
-
+        return ResponseEntity.noContent().build();
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
+import com.example.demo.data.dto.CorsoDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.data.entity.Discente;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/corsi")
 public class CorsoController {
 
@@ -35,8 +38,7 @@ public class CorsoController {
 
     // LISTA
     @GetMapping("/lista")
-    public ModelAndView list(@RequestParam(name = "filtro", required = false) String filtro) {
-        ModelAndView modelAndView = new ModelAndView("list-corsi");
+    public List<CorsoDTO> list(@RequestParam(name = "filtro", required = false) String filtro) {
         List<Corso> corsi = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
@@ -47,20 +49,9 @@ public class CorsoController {
             corsi = corsoService.findAll();
         }
 
-        modelAndView.addObject("corsi", corsi);
-        return modelAndView;
+        return converter.corso_convert_to_dto(corsi);
 
     }
-
-    /*
-    // FORM NUOVO
-    @GetMapping("/new")
-    public String showAdd(Model model) {
-        model.addAttribute("corso", new Corso());
-        return "form-corso";
-    }
-
-    */
 
 
     // FORM NUOVO

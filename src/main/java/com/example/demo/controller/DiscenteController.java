@@ -1,9 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
+import com.example.demo.data.dto.DiscenteDTO;
+import com.example.demo.data.dto.DocenteDTO;
+import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Discente;
+import com.example.demo.data.entity.Docente;
 import com.example.demo.service.DiscenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/discenti")
 public class DiscenteController {
 
@@ -23,11 +28,9 @@ public class DiscenteController {
     Converter converter;
 
 
-
-    // LISTA - funziona
+    // GET - tutti i discenti
     @GetMapping("/lista")
-    public ModelAndView list(@RequestParam(name = "filtro", required = false) String filtro) {
-        ModelAndView modelAndView = new ModelAndView("list-discenti");
+    public ResponseEntity<List<DiscenteDTO>> list(@RequestParam(name = "filtro", required = false) String filtro) {
         List<Discente> discenti = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
@@ -38,31 +41,18 @@ public class DiscenteController {
             discenti = discenteService.findAll();
         }
 
-        modelAndView.addObject("discenti", converter.discente_convert_to_dto(discenti));
-        return modelAndView;
-    }
-
-    /*
-    // FORM NUOVO
-    @GetMapping("/new")
-    public String showAdd(Model model) {
-        model.addAttribute("discente", new Discente());
-        return "form-discente";
-    }
-
-    */
-
-
-    // FORM NUOVO - funziona
-    @GetMapping("/new")
-    public ModelAndView showAdd() {
-        ModelAndView modelAndView = new ModelAndView("form-discente");
-        modelAndView.addObject("discente", new Discente());
-        return modelAndView;
+        return ResponseEntity.ok(converter.discente_convert_to_dto(discenti));
     }
 
 
-    // SALVA NUOVO - funziona
+    // POST - nuovo docente
+    @PostMapping("/new")
+    public ResponseEntity<Discente> showAdd(@RequestBody Discente discente) {
+        Discente nuovo = discenteService.save(discente);
+        return ResponseEntity.ok(nuovo);
+    }
+
+    // POST -
     @PostMapping
     public String create(@ModelAttribute("discente") Discente discente,
                          BindingResult br) {
@@ -72,49 +62,39 @@ public class DiscenteController {
     }
 
 
-    /*
-    // FORM EDIT - old
-    @GetMapping("/{id}/edit")
-    public String showEdit(@PathVariable Long id, Model model) {
-        model.addAttribute("discente", discenteService.get(id));
-        return "form-discente";
-    }
-    */
+    // PUT - modifica
+    @PutMapping("/{id}/edit")
+    public ResponseEntity<Discente> showEdit(@PathVariable Long id, @RequestBody Discente aggiornato) {
+        Discente discente = discenteService.get(id);
 
+        //
+        discente.setNome(aggiornato.getNome());
+        discente.setCognome(aggiornato.getCognome());
+        discente.setMatricola(aggiornato.getMatricola());
+        discente.setEta(aggiornato.getEta());
+        discente.setCorsi(aggiornato.getCorsi());
 
-    // FORM EDIT
-    @GetMapping("/{id}/edit")
-    public ModelAndView showEdit(@PathVariable Long id, Model model) {
-        ModelAndView modelAndView = new ModelAndView("form-discente");
-        modelAndView.addObject("discente", discenteService.get(id));
-        return modelAndView;
-    }
-
-
-
-    // AGGIORNA
-    @PostMapping("/{id}")
-    public String update(@PathVariable Long id,
-                         @ModelAttribute("discente") Discente discente,
-                         BindingResult br) {
-        if (br.hasErrors()) return "form-discente";
-        discente.setId(id);
         discenteService.save(discente);
-        return "redirect:/discenti/lista";
+        return ResponseEntity.ok(discente);
     }
+
+//    // AGGIORNA
+//    @PostMapping("/{id}")
+//    public String update(@PathVariable Long id,
+//                         @ModelAttribute("discente") Discente discente,
+//                         BindingResult br) {
+//        if (br.hasErrors()) return "form-discente";
+//        discente.setId(id);
+//        discenteService.save(discente);
+//        return "redirect:/discenti/lista";
+//    }
+
 
     // DELETE
-    @GetMapping("/{id}/delete")
-    public String delete(@PathVariable Long id) {
-        discenteService.delete(id);
-        return "redirect:/discenti/lista";
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
 
 
 }

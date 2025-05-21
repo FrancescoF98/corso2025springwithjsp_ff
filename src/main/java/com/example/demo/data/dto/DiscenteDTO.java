@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DiscenteDTO {
 
-    private Long id;
+    //private Long id;
 
     private String nome;
 
@@ -26,21 +26,21 @@ public class DiscenteDTO {
     /* costruttori */
     public DiscenteDTO() {}
 
-    public DiscenteDTO(Long id, String nome, String cognome, Integer matricola, Integer eta) {
-        this.id = id;
+    public DiscenteDTO(String nome, String cognome, Integer matricola, Integer eta) {
+//        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.matricola = matricola;
         this.eta = eta;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
 
     public String getNome() {
