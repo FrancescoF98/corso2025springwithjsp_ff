@@ -1,6 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
+import com.example.demo.data.dto.CorsoDTO;
+
+import com.example.demo.data.dto.DiscenteDTO;
+import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.data.entity.Discente;
@@ -37,7 +41,7 @@ public class CorsoController {
     @GetMapping("/lista")
     public ModelAndView list(@RequestParam(name = "filtro", required = false) String filtro) {
         ModelAndView modelAndView = new ModelAndView("list-corsi");
-        List<Corso> corsi = new ArrayList<>();
+        List<CorsoDTO> corsi = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
             corsi = corsoService.ordina_by_nome_asc();
@@ -67,7 +71,7 @@ public class CorsoController {
     @GetMapping("/new")
     public ModelAndView showAdd() {
         ModelAndView modelAndView = new ModelAndView("form-corso");
-        List<Docente> docenti = docenteService.findAll();
+        List<DocenteDTO> docenti = docenteService.findAll();
 
         modelAndView.addObject("corso", new Corso());
         modelAndView.addObject("docenti", docenti);
@@ -79,17 +83,17 @@ public class CorsoController {
 
     // SALVA NUOVO
     @PostMapping
-    public String create(@ModelAttribute("corso") Corso corso,
+    public String create(@ModelAttribute("corso") CorsoDTO corsoDTO,
                          @RequestParam(value = "discenti", required = false) List<Long> id_discenti,
                          BindingResult br) {
         if (br.hasErrors()) return "form-corso";
 
         if (id_discenti != null) {
-            List<Discente> selectedDiscenti = discenteService.findAllByIds(id_discenti);
-            corso.setDiscenti(selectedDiscenti);
+            List<DiscenteDTO> selectedDiscenti = discenteService.findAllByIds(id_discenti);
+            corsoDTO.setDiscenti(selectedDiscenti);
         }
 
-        corsoService.save(corso);
+        corsoService.save(corsoDTO);
         return "redirect:/corsi/lista";
     }
 
@@ -108,7 +112,7 @@ public class CorsoController {
     @GetMapping("/{id}/edit")
     public ModelAndView showEdit(@PathVariable Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView("form-corso");
-        List<Docente> docenti = docenteService.findAll();
+        List<DocenteDTO> docenti = docenteService.findAll();
 
         modelAndView.addObject("corso", corsoService.get(id));
         modelAndView.addObject("docenti", docenti);
@@ -122,11 +126,11 @@ public class CorsoController {
     // AGGIORNA
     @PostMapping("/{id}")
     public String update(@PathVariable Long id,
-                         @ModelAttribute("corso") Corso corso,
+                         @ModelAttribute("corso") CorsoDTO corsoDTO,
                          BindingResult br) {
         if (br.hasErrors()) return "form-corso";
-        corso.setId(id);
-        corsoService.save(corso);
+        corsoDTO.setId(id);
+        corsoService.save(corsoDTO);
         return "redirect:/corsi/lista";
     }
 

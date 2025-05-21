@@ -16,10 +16,18 @@ public class Docente {
     @Column(nullable = false)
     private String cognome;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
-
+    @Override
+    public String toString() {
+        return "Docente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 
     /* costruttori */
     public Docente() {}

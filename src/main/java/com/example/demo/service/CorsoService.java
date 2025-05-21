@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
+import com.example.demo.data.dto.CorsoDTO;
 import com.example.demo.data.entity.Corso;
+import com.example.demo.mapper.CorsoMapper;
 import com.example.demo.repository.CorsoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,17 +16,29 @@ public class CorsoService {
 
     @Autowired
     CorsoRepository corsoRepository;
+    @Autowired
+    CorsoMapper corsoMapper;
 
-    public List<Corso> findAll() {
-        return corsoRepository.findAll();
+    public List<CorsoDTO> findAll() {
+        List<Corso> corsi = corsoRepository.findAll();
+        List<CorsoDTO> corsiDTO = new ArrayList<CorsoDTO>();
+
+        for (int i = 0; i < corsi.size(); i++) {
+            CorsoDTO nuovo_elemento = corsoMapper.toDto(corsi.get(i));
+            corsiDTO.add(nuovo_elemento);
+        }
+
+        return corsiDTO;
     }
 
-    public Corso get(Long id) {
-        return corsoRepository.findById(id).orElseThrow();
+    public CorsoDTO get(Long id) {
+        Corso corso = corsoRepository.findById(id).orElseThrow();
+        return corsoMapper.toDto(corso);
     }
 
-    public Corso save(Corso s) {
-        return corsoRepository.save(s);
+    public Corso save(CorsoDTO s) {
+        Corso entity = corsoMapper.toEntity(s);
+        return corsoRepository.save(entity);
     }
 
     public void delete(Long id) {
@@ -31,12 +46,28 @@ public class CorsoService {
     }
 
     // Query custom
-    public List<Corso> ordina_by_nome_asc() {
-        return corsoRepository.ordina_by_nome_asc();
+    public List<CorsoDTO> ordina_by_nome_asc() {
+        List<Corso> corsi = corsoRepository.ordina_by_nome_asc();
+        List<CorsoDTO> corsiDTO = new ArrayList<CorsoDTO>();
+
+        for (int i = 0; i < corsi.size(); i++) {
+            CorsoDTO nuovo_elemento = corsoMapper.toDto(corsi.get(i));
+            corsiDTO.add(nuovo_elemento);
+        }
+
+        return corsiDTO;
     }
 
-    public List<Corso> ordina_by_nome_desc() {
-        return corsoRepository.ordina_by_nome_desc();
+    public List<CorsoDTO> ordina_by_nome_desc() {
+        List<Corso> corsi = corsoRepository.ordina_by_nome_desc();
+        List<CorsoDTO> corsiDTO = new ArrayList<CorsoDTO>();
+
+        for (int i = 0; i < corsi.size(); i++) {
+            CorsoDTO nuovo_elemento = corsoMapper.toDto(corsi.get(i));
+            corsiDTO.add(nuovo_elemento);
+        }
+
+        return corsiDTO;
     }
 }
 

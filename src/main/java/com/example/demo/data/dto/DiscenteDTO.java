@@ -19,8 +19,7 @@ public class DiscenteDTO {
 
     private Integer eta;
 
-
-    private List<CorsoDTO> corsi = new ArrayList<>();
+//    private List<CorsoDTO> corsi = new ArrayList<>();
 
 
     /* costruttori */
@@ -78,12 +77,12 @@ public class DiscenteDTO {
     }
 
 
-    public List<CorsoDTO> getCorsi() {
-        return corsi;
-    }
-
-    public void setCorsi(List<CorsoDTO> corsi) {
-        this.corsi = corsi;
-    }
+//    public List<CorsoDTO> getCorsi() {
+//        return corsi;
+//    }
+//
+//    public void setCorsi(List<CorsoDTO> corsi) {
+//        this.corsi = corsi;
+//    }
 
 }

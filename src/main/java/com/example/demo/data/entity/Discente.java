@@ -35,6 +35,18 @@ public class Discente {
     @ManyToMany(mappedBy = "discenti", fetch = FetchType.LAZY)
     private List<Corso> corsi = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Discente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", matricola=" + matricola +
+                ", eta=" + eta +
+                ", citta_residenza='" + citta_residenza + '\'' +
+                ", corsi=" + corsi +
+                '}';
+    }
 
     /* costruttori */
     public Discente() {}

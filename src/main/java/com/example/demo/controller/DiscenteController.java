@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
+import com.example.demo.data.dto.DiscenteDTO;
 import com.example.demo.data.entity.Discente;
 import com.example.demo.service.DiscenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class DiscenteController {
     @GetMapping("/lista")
     public ModelAndView list(@RequestParam(name = "filtro", required = false) String filtro) {
         ModelAndView modelAndView = new ModelAndView("list-discenti");
-        List<Discente> discenti = new ArrayList<>();
+        List<DiscenteDTO> discenti = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
             discenti = discenteService.ordina_by_nome_asc();
@@ -38,7 +39,7 @@ public class DiscenteController {
             discenti = discenteService.findAll();
         }
 
-        modelAndView.addObject("discenti", converter.discente_convert_to_dto(discenti));
+        modelAndView.addObject("discenti", discenti);
         return modelAndView;
     }
 
@@ -64,7 +65,7 @@ public class DiscenteController {
 
     // SALVA NUOVO - funziona
     @PostMapping
-    public String create(@ModelAttribute("discente") Discente discente,
+    public String create(@ModelAttribute("discente") DiscenteDTO discente,
                          BindingResult br) {
         if (br.hasErrors()) return "form-discente";
         discenteService.save(discente);
@@ -95,7 +96,7 @@ public class DiscenteController {
     // AGGIORNA
     @PostMapping("/{id}")
     public String update(@PathVariable Long id,
-                         @ModelAttribute("discente") Discente discente,
+                         @ModelAttribute("discente") DiscenteDTO discente,
                          BindingResult br) {
         if (br.hasErrors()) return "form-discente";
         discente.setId(id);

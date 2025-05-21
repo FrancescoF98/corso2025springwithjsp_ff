@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
+import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.repository.CorsoRepository;
@@ -28,7 +29,7 @@ public class DocenteController {
     // LISTA
     @GetMapping("/lista")
     public String list(Model model, @RequestParam(name = "filtro", required = false) String filtro) {
-        List<Docente> docenti = new ArrayList<>();
+        List<DocenteDTO> docenti = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
             docenti = docenteService.ordina_by_nome_asc();
@@ -38,7 +39,7 @@ public class DocenteController {
             docenti = docenteService.findAll();
         }
 
-        model.addAttribute("docenti", converter.docente_convert_to_dto(docenti));
+        model.addAttribute("docenti", docenti);
         return "list-docenti";
     }
 
@@ -51,7 +52,7 @@ public class DocenteController {
 
     // SALVA NUOVO
     @PostMapping
-    public String create(@ModelAttribute("docente") Docente docente,
+    public String create(@ModelAttribute("docente") DocenteDTO docente,
                          BindingResult br) {
         if (br.hasErrors()) return "form-docente";
         docenteService.save(docente);
@@ -68,7 +69,7 @@ public class DocenteController {
     // AGGIORNA
     @PostMapping("/{id}")
     public String update(@PathVariable Long id,
-                         @ModelAttribute("docente") Docente docente,
+                         @ModelAttribute("docente") DocenteDTO docente,
                          BindingResult br) {
         if (br.hasErrors()) return "form-docente";
         docente.setId(id);

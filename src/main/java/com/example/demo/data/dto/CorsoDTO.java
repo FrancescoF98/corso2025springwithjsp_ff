@@ -17,13 +17,23 @@ public class CorsoDTO {
 
     private Integer anno_accademico;
 
-    private List<Discente> discenti = new ArrayList<>();
+    private List<DiscenteDTO> discenti = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "CorsoDTO{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", id_doc=" + id_doc +
+                ", anno_accademico=" + anno_accademico +
+                ", discenti=" + discenti +
+                '}';
+    }
 
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(Long id, String nome, Docente id_doc, Integer anno_accademico, List<Discente> discenti) {
+    public CorsoDTO(Long id, String nome, Docente id_doc, Integer anno_accademico, List<DiscenteDTO> discenti) {
         this.id = id;
         this.nome = nome;
         this.id_doc = id_doc;
@@ -64,11 +74,11 @@ public class CorsoDTO {
     }
 
     //
-    public List<Discente> getDiscenti() {
+    public List<DiscenteDTO> getDiscenti() {
         return discenti;
     }
 
-    public void setDiscenti(List<Discente> discenti) {
+    public void setDiscenti(List<DiscenteDTO> discenti) {
         this.discenti = discenti;
     }
 

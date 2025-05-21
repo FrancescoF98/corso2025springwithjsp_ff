@@ -71,11 +71,6 @@
             <form:input path="eta" id="eta" type="number" required="true"/>
         </div>
 
-        <div>
-            <label for="citta_residenza">Città_residenza:</label>
-            <form:input path="citta_residenza" id="citta_residenza" required="true"/>
-        </div>
-
 
         <div>
             <button type="submit">Salva</button>
