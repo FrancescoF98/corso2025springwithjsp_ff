@@ -45,21 +45,21 @@ public class DiscenteController {
     }
 
 
-    // POST - nuovo docente
+    // POST - nuovo
     @PostMapping("/new")
     public ResponseEntity<Discente> showAdd(@RequestBody Discente discente) {
         Discente nuovo = discenteService.save(discente);
         return ResponseEntity.ok(nuovo);
     }
 
-    // POST -
-    @PostMapping
-    public String create(@ModelAttribute("discente") Discente discente,
-                         BindingResult br) {
-        if (br.hasErrors()) return "form-discente";
-        discenteService.save(discente);
-        return "redirect:/discenti/lista";
-    }
+//    // POST -
+//    @PostMapping
+//    public String create(@ModelAttribute("discente") Discente discente,
+//                         BindingResult br) {
+//        if (br.hasErrors()) return "form-discente";
+//        discenteService.save(discente);
+//        return "redirect:/discenti/lista";
+//    }
 
 
     // PUT - modifica

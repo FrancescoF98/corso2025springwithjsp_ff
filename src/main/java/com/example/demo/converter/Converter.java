@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class Converter {
 
-    // DOCENTE
+    // DOCENTE - List
     public List<DocenteDTO> docente_convert_to_dto(List<Docente> elementi_in_entrata){
 
         // Creo una lista vuota
@@ -34,6 +34,14 @@ public class Converter {
 
         // restituisco la lista convertita
         return elementi_convertiti;
+    }
+
+    // DOCENTE - Docente
+    public DocenteDTO docente_convert_to_dto(Docente elementi_in_entrata){
+
+        DocenteDTO nuovo_elemento = new DocenteDTO(elementi_in_entrata.getNome(), elementi_in_entrata.getCognome());
+
+        return nuovo_elemento;
     }
 
 
@@ -72,7 +80,7 @@ public class Converter {
 
             Long id = elementi_in_entrata.get(i).getId();
             String nome = elementi_in_entrata.get(i).getNome();
-            Docente id_doc = elementi_in_entrata.get(i).getId_doc();
+            DocenteDTO id_doc = docente_convert_to_dto(elementi_in_entrata.get(i).getId_doc());
             Integer anno_accademico = elementi_in_entrata.get(i).getAnno_accademico();
             List<DiscenteDTO> discenti = discente_convert_to_dto(elementi_in_entrata.get(i).getDiscenti());
 

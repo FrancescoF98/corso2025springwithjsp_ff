@@ -15,7 +15,7 @@ public class CorsoDTO {
 
     private String nome;
 
-    private Docente id_doc;
+    private DocenteDTO id_doc;
 
     private Integer anno_accademico;
 
@@ -25,7 +25,7 @@ public class CorsoDTO {
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(Long id, String nome, Docente id_doc, Integer anno_accademico, List<DiscenteDTO> discenti) {
+    public CorsoDTO(Long id, String nome, DocenteDTO id_doc, Integer anno_accademico, List<DiscenteDTO> discenti) {
         this.id = id;
         this.nome = nome;
         this.id_doc = id_doc;
@@ -50,11 +50,11 @@ public class CorsoDTO {
         this.nome = nome;
     }
 
-    public Docente getId_doc() {
+    public DocenteDTO getId_doc() {
         return id_doc;
     }
 
-    public void setId_doc(Docente id_doc) {
+    public void setId_doc(DocenteDTO id_doc) {
         this.id_doc = id_doc;
     }
 

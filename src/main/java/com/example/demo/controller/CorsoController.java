@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.CorsoDTO;
+import com.example.demo.data.dto.DiscenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.data.entity.Discente;
@@ -9,6 +10,7 @@ import com.example.demo.service.CorsoService;
 import com.example.demo.service.DocenteService;
 import com.example.demo.service.DiscenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,7 @@ public class CorsoController {
 
     // LISTA
     @GetMapping("/lista")
-    public List<CorsoDTO> list(@RequestParam(name = "filtro", required = false) String filtro) {
+    public ResponseEntity<List<CorsoDTO>> list(@RequestParam(name = "filtro", required = false) String filtro) {
         List<Corso> corsi = new ArrayList<>();
 
         if ("asc".equalsIgnoreCase(filtro)) {
@@ -49,77 +51,62 @@ public class CorsoController {
             corsi = corsoService.findAll();
         }
 
-        return converter.corso_convert_to_dto(corsi);
+        return ResponseEntity.ok(converter.corso_convert_to_dto(corsi));
 
     }
 
 
-    // FORM NUOVO
-    @GetMapping("/new")
-    public ModelAndView showAdd() {
-        ModelAndView modelAndView = new ModelAndView("form-corso");
-        List<Docente> docenti = docenteService.findAll();
-
-        modelAndView.addObject("corso", new Corso());
-        modelAndView.addObject("docenti", docenti);
-        modelAndView.addObject("discenti", discenteService.findAll());
-
-        return modelAndView;
+    // POST - nuovo
+    @PostMapping("/new")
+    public ResponseEntity<Corso> showAdd(@RequestBody Corso corso) {
+        Corso nuovo = corsoService.save(corso);
+        return ResponseEntity.ok(nuovo);
     }
 
 
-    // SALVA NUOVO
-    @PostMapping
-    public String create(@ModelAttribute("corso") Corso corso,
-                         @RequestParam(value = "discenti", required = false) List<Long> id_discenti,
-                         BindingResult br) {
-        if (br.hasErrors()) return "form-corso";
+//    // POST -
+//    @PostMapping
+//    public String create(@ModelAttribute("corso") Corso corso,
+//                         @RequestParam(value = "discenti", required = false) List<Long> id_discenti,
+//                         BindingResult br) {
+//        if (br.hasErrors()) return "form-corso";
+//
+//        if (id_discenti != null) {
+//            List<Discente> selectedDiscenti = discenteService.findAllByIds(id_discenti);
+//            corso.setDiscenti(selectedDiscenti);
+//        }
+//
+//        corsoService.save(corso);
+//        return "redirect:/corsi/lista";
+//    }
 
-        if (id_discenti != null) {
-            List<Discente> selectedDiscenti = discenteService.findAllByIds(id_discenti);
-            corso.setDiscenti(selectedDiscenti);
-        }
+
+    // PUT - modifica
+    @PutMapping("/{id}/edit")
+    public ResponseEntity<Corso> showEdit(@PathVariable Long id, @RequestBody Corso aggiornato) {
+        Corso corso = corsoService.get(id);
+
+        //
+        corso.setNome(aggiornato.getNome());
+        corso.setId_doc(aggiornato.getId_doc());
+        corso.setAnno_accademico(aggiornato.getAnno_accademico());
+        corso.setDiscenti(aggiornato.getDiscenti());
 
         corsoService.save(corso);
-        return "redirect:/corsi/lista";
+        return ResponseEntity.ok(corso);
     }
 
 
-    /*
-    // FORM EDIT - old
-    @GetMapping("/{id}/edit")
-    public String showEdit(@PathVariable Long id, Model model) {
-        model.addAttribute("corso", corsoService.get(id));
-        return "form-corso";
-    }
-    */
-
-
-    // FORM EDIT
-    @GetMapping("/{id}/edit")
-    public ModelAndView showEdit(@PathVariable Long id, Model model) {
-        ModelAndView modelAndView = new ModelAndView("form-corso");
-        List<Docente> docenti = docenteService.findAll();
-
-        modelAndView.addObject("corso", corsoService.get(id));
-        modelAndView.addObject("docenti", docenti);
-        modelAndView.addObject("discenti", discenteService.findAll());
-
-        return modelAndView;
-    }
-
-
-
-    // AGGIORNA
-    @PostMapping("/{id}")
-    public String update(@PathVariable Long id,
-                         @ModelAttribute("corso") Corso corso,
-                         BindingResult br) {
-        if (br.hasErrors()) return "form-corso";
-        corso.setId(id);
-        corsoService.save(corso);
-        return "redirect:/corsi/lista";
-    }
+//    // AGGIORNA
+//    @PostMapping("/{id}")
+//    public String update(@PathVariable Long id,
+//                         @ModelAttribute("corso") Corso corso,
+//                         BindingResult br) {
+//        if (br.hasErrors()) return "form-corso";
+//        corso.setId(id);
+//        corsoService.save(corso);
+//        return "redirect:/corsi/lista";
+//    }
 
     // DELETE
     @GetMapping("/{id}/delete")

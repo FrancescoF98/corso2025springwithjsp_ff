@@ -50,14 +50,14 @@ public class DocenteController {
         return ResponseEntity.ok(nuovo);
     }
 
-    // POST -
-    @PostMapping
-    public String create(@ModelAttribute("docente") Docente docente,
-                         BindingResult br) {
-        if (br.hasErrors()) return "form-docente";
-        docenteService.save(docente);
-        return "redirect:/docenti/lista";
-    }
+//    // POST -
+//    @PostMapping
+//    public String create(@ModelAttribute("docente") Docente docente,
+//                         BindingResult br) {
+//        if (br.hasErrors()) return "form-docente";
+//        docenteService.save(docente);
+//        return "redirect:/docenti/lista";
+//    }
 
     // PUT - modifica
     @PutMapping("/{id}/edit")

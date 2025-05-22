@@ -20,7 +20,6 @@ public class Docente {
     private String email;
 
 
-
     /* costruttori */
     public Docente() {}
 
