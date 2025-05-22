@@ -28,7 +28,7 @@ public class Discente {
     @Column(nullable = false)
     private Integer eta;
 
-    @Column(nullable = false)
+    @Column
     private String citta_residenza;
 
 

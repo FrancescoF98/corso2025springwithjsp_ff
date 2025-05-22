@@ -47,9 +47,15 @@ public class DiscenteController {
 
     // POST - nuovo
     @PostMapping("/new")
-    public ResponseEntity<Discente> showAdd(@RequestBody Discente discente) {
-        Discente nuovo = discenteService.save(discente);
-        return ResponseEntity.ok(nuovo);
+    public ResponseEntity<DiscenteDTO> showAdd(@RequestBody DiscenteDTO discente) {
+
+        // converto
+        Discente nuovo = converter.discente_convert_to_entity(discente);
+        // salvo
+        discenteService.save(nuovo);
+        //
+        return ResponseEntity.ok(discente);
+
     }
 
 //    // POST -
@@ -64,8 +70,8 @@ public class DiscenteController {
 
     // PUT - modifica
     @PutMapping("/{id}/edit")
-    public ResponseEntity<Discente> showEdit(@PathVariable Long id, @RequestBody Discente aggiornato) {
-        Discente discente = discenteService.get(id);
+    public ResponseEntity<DiscenteDTO> showEdit(@PathVariable Long id, @RequestBody DiscenteDTO aggiornato) {
+        DiscenteDTO discente = converter.discente_convert_to_dto(discenteService.get(id));
 
         //
         discente.setNome(aggiornato.getNome());
@@ -74,7 +80,9 @@ public class DiscenteController {
         discente.setEta(aggiornato.getEta());
         discente.setCorsi(aggiornato.getCorsi());
 
-        discenteService.save(discente);
+        Discente modificato = converter.discente_convert_to_entity(discente);
+
+        discenteService.save(modificato);
         return ResponseEntity.ok(discente);
     }
 

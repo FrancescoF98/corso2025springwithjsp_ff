@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
+import com.example.demo.data.entity.Discente;
 import com.example.demo.data.entity.Docente;
 import com.example.demo.repository.CorsoRepository;
 import com.example.demo.service.DocenteService;
@@ -45,9 +46,13 @@ public class DocenteController {
 
     // POST - nuovo docente
     @PostMapping("/new")
-    public ResponseEntity<Docente> showAdd(@RequestBody Docente docente) {
-        Docente nuovo = docenteService.save(docente);
-        return ResponseEntity.ok(nuovo);
+    public ResponseEntity<DocenteDTO> showAdd(@RequestBody DocenteDTO docente) {
+        // converto
+        Docente nuovo = converter.docente_convert_to_entity(docente);
+        // salvo
+        docenteService.save(nuovo);
+        //
+        return ResponseEntity.ok(docente);
     }
 
 //    // POST -
@@ -61,15 +66,18 @@ public class DocenteController {
 
     // PUT - modifica
     @PutMapping("/{id}/edit")
-    public ResponseEntity<Docente> showEdit(@PathVariable Long id, @RequestBody Docente doc_aggiornato) {
-        Docente docente = docenteService.get(id);
+    public ResponseEntity<DocenteDTO> showEdit(@PathVariable Long id, @RequestBody DocenteDTO doc_aggiornato) {
+        DocenteDTO docente = converter.docente_convert_to_dto(docenteService.get(id));
 
         //
         docente.setNome(doc_aggiornato.getNome());
         docente.setCognome(doc_aggiornato.getCognome());
 
-        docenteService.save(docente);
+        Docente modificato = converter.docente_convert_to_entity(docente);
+
+        docenteService.save(modificato);
         return ResponseEntity.ok(docente);
+
     }
 
 
