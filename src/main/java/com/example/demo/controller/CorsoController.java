@@ -56,15 +56,7 @@ public class CorsoController {
 
     }
 
-    /*
-    // FORM NUOVO
-    @GetMapping("/new")
-    public String showAdd(Model model) {
-        model.addAttribute("corso", new Corso());
-        return "form-corso";
-    }
 
-    */
 
 
     // FORM NUOVO
