@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CorsoDTO {
 
-    @JsonIgnore
+    //@JsonIgnore
     private Long id;
 
     private String nome;

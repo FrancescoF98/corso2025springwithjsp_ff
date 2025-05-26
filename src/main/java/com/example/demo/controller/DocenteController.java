@@ -67,6 +67,7 @@ public class DocenteController {
     // PUT - modifica
     @PutMapping("/{id}/edit")
     public ResponseEntity<DocenteDTO> showEdit(@PathVariable Long id, @RequestBody DocenteDTO doc_aggiornato) {
+        // questa linea non ha senso ma funziona e la lascio così - 2025/05/26
         DocenteDTO docente = converter.docente_convert_to_dto(docenteService.get(id));
 
         //

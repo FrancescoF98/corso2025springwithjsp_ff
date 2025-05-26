@@ -71,6 +71,7 @@ public class DiscenteController {
     // PUT - modifica
     @PutMapping("/{id}/edit")
     public ResponseEntity<DiscenteDTO> showEdit(@PathVariable Long id, @RequestBody DiscenteDTO aggiornato) {
+        // questa linea non ha senso ma funziona e la lascio così - 2025/05/26
         DiscenteDTO discente = converter.discente_convert_to_dto(discenteService.get(id));
 
         //
@@ -101,6 +102,7 @@ public class DiscenteController {
     // DELETE
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        discenteService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
