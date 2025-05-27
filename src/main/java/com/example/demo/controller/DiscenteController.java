@@ -2,18 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.DiscenteDTO;
-import com.example.demo.data.dto.DocenteDTO;
-import com.example.demo.data.entity.Corso;
 import com.example.demo.data.entity.Discente;
-import com.example.demo.data.entity.Docente;
 import com.example.demo.service.DiscenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,15 +51,6 @@ public class DiscenteController {
 
     }
 
-//    // POST -
-//    @PostMapping
-//    public String create(@ModelAttribute("discente") Discente discente,
-//                         BindingResult br) {
-//        if (br.hasErrors()) return "form-discente";
-//        discenteService.save(discente);
-//        return "redirect:/discenti/lista";
-//    }
-
 
     // PUT - modifica
     @PutMapping("/{id}/edit")
@@ -86,17 +70,6 @@ public class DiscenteController {
         discenteService.save(modificato);
         return ResponseEntity.ok(discente);
     }
-
-//    // AGGIORNA
-//    @PostMapping("/{id}")
-//    public String update(@PathVariable Long id,
-//                         @ModelAttribute("discente") Discente discente,
-//                         BindingResult br) {
-//        if (br.hasErrors()) return "form-discente";
-//        discente.setId(id);
-//        discenteService.save(discente);
-//        return "redirect:/discenti/lista";
-//    }
 
 
     // DELETE

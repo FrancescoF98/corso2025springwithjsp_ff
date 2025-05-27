@@ -55,15 +55,6 @@ public class DocenteController {
         return ResponseEntity.ok(docente);
     }
 
-//    // POST -
-//    @PostMapping
-//    public String create(@ModelAttribute("docente") Docente docente,
-//                         BindingResult br) {
-//        if (br.hasErrors()) return "form-docente";
-//        docenteService.save(docente);
-//        return "redirect:/docenti/lista";
-//    }
-
     // PUT - modifica
     @PutMapping("/{id}/edit")
     public ResponseEntity<DocenteDTO> showEdit(@PathVariable Long id, @RequestBody DocenteDTO doc_aggiornato) {
@@ -82,18 +73,6 @@ public class DocenteController {
     }
 
 
-//    // AGGIORNA
-//    @PostMapping("/{id}")
-//    public String update(@PathVariable Long id,
-//                         @ModelAttribute("docente") Docente docente,
-//                         BindingResult br) {
-//        if (br.hasErrors()) return "form-docente";
-//        docente.setId(id);
-//        docenteService.save(docente);
-//        return "redirect:/docenti/lista";
-//    }
-
-
     // DELETE
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -108,7 +87,6 @@ public class DocenteController {
 
         return ResponseEntity.noContent().build();
     }
-
 
 
 
