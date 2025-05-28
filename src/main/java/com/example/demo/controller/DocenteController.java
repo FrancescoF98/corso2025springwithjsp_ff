@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.CustomConfig;
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
@@ -27,6 +28,17 @@ public class DocenteController {
     CorsoRepository corsoRepository;
     @Autowired
     Converter converter;
+
+    private final CustomConfig config;
+
+    public DocenteController(CustomConfig config) {
+        this.config = config;
+    }
+
+    @GetMapping("/")
+    public String message() {
+        return config.getMessage();
+    }
 
     // GET - tutti i docenti
     @GetMapping("/lista")
